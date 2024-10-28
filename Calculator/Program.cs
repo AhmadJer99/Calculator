@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using CalculatorLibrary;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 class Program
 {
@@ -82,6 +83,7 @@ class Program
 
             Console.WriteLine("\n"); // Friendly linespacing.
         }
+        calculator.Finish();
         return;
     }
 }
