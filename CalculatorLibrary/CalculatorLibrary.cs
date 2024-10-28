@@ -7,8 +7,24 @@ namespace CalculatorLibrary
     public class Calculator
     {
         JsonWriter writer;
+        JsonWriter countWriter;
+        protected int _counter { get; set; } = 0;
+        public void UsageCounter()
+        {
+            _counter++;
+        }
         public Calculator()
         {
+            StreamWriter countLogFile = File.CreateText("UsageCountLog.json");
+            countLogFile.AutoFlush = true;
+            countWriter = new JsonTextWriter(countLogFile);
+            countWriter.Formatting = Formatting.Indented;
+            countWriter.WriteStartObject();
+            countWriter.WritePropertyName("Usage count");
+            countWriter.WriteStartArray();
+            countWriter.WriteStartObject();
+            countWriter.WritePropertyName("count");
+
             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
@@ -65,6 +81,12 @@ namespace CalculatorLibrary
             writer.WriteEndArray();
             writer.WriteEndObject();
             writer.Close();
+
+            countWriter.WriteValue(_counter);
+            countWriter.WriteEndObject();
+            countWriter.WriteEndArray();
+            countWriter.WriteEndObject();
+            countWriter.Close();
         }
     }
 }
