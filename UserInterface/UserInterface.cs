@@ -45,14 +45,19 @@ public class UserInterface
                             {
                                 Console.WriteLine("This operation will result in a mathematical error.\n");
                             }
-                            else Console.WriteLine("Your result: {0:0.##}\n", calculationResult);
+                            else
+                            {
+                                Console.WriteLine("Your result: {0:0.##}\n", calculationResult);
+                                calculator.UsageCounter();
+                            }
+                            
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                         }
                     
-                    calculator.UsageCounter();
+                    
                     Console.WriteLine("------------------------\n");
 
                     // Wait for the user to respond before closing.
@@ -80,13 +85,17 @@ public class UserInterface
                         {
                             Console.WriteLine("This operation will result in a mathematical error.\n");
                         }
-                        else Console.WriteLine("Your result: {0:0.##}\n", calculationResult);
+                        else
+                        {
+                            Console.WriteLine("Your result: {0:0.##}\n", calculationResult);
+                            calculator.UsageCounter();
+                        }
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                     }
-                    calculator.UsageCounter();
+                    
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     break;
