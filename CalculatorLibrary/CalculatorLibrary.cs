@@ -1,21 +1,33 @@
 ﻿using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace CalculatorLibrary
 {
     public class Calculator
     {
+        protected  string _pastResults = "";
+        
         JsonWriter writer;
         JsonWriter countWriter;
         protected int _counter { get; set; } = 0;
+        protected readonly string _countLogFilePath = "UsageCountLog.json";
+        public void ShowUsage()
+        {
+            
+            Console.WriteLine(string.Format("You've used the calculator {0} {1}",_counter,(_counter > 1 ? "times":"time")));
+        }
+
         public void UsageCounter()
         {
             _counter++;
         }
         public Calculator()
         {
-            StreamWriter countLogFile = File.CreateText("UsageCountLog.json");
+             StreamWriter countLogFile = File.CreateText(_countLogFilePath);
             countLogFile.AutoFlush = true;
             countWriter = new JsonTextWriter(countLogFile);
             countWriter.Formatting = Formatting.Indented;
@@ -25,7 +37,7 @@ namespace CalculatorLibrary
             countWriter.WriteStartObject();
             countWriter.WritePropertyName("count");
 
-            StreamWriter logFile = File.CreateText("calculatorlog.json");
+             StreamWriter logFile = File.CreateText("calculatorlog.json");
             logFile.AutoFlush = true;
             writer = new JsonTextWriter(logFile);
             writer.Formatting = Formatting.Indented;
@@ -49,14 +61,17 @@ namespace CalculatorLibrary
                 case "a":
                     result = num1 + num2;
                     writer.WriteValue("Add");
+                    _pastResults += $"{num1} + {num2} = {result},";
                     break;
                 case "s":
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
+                    _pastResults += $"{num1} - {num2} = {result},";
                     break;
                 case "m":
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
+                    _pastResults += $"{num1} * {num2} = {result},";
                     break;
                 case "d":
                     // Ask the user to enter a non-zero divisor.
@@ -65,8 +80,10 @@ namespace CalculatorLibrary
                         result = num1 / num2;
                     }
                     writer.WriteValue("Divide");
+                    _pastResults += $"{num1} / {num2} = {result},";
                     break;
                 // Return text for an incorrect option entry.
+  
                 default:
                     break;
             }
@@ -87,6 +104,21 @@ namespace CalculatorLibrary
             countWriter.WriteEndArray();
             countWriter.WriteEndObject();
             countWriter.Close();
+        }
+        public void ShowHistory()
+        {
+            Console.WriteLine("Previous calculations: ");
+            string[] pastResults = _pastResults.Split(',');
+            foreach (string result in pastResults)
+            {
+                Console.WriteLine(result);
+            }
+            Console.WriteLine("\n");
+        }
+        public void DeleteHistory()
+        {
+            Console.WriteLine("Deleting history...");
+            _pastResults = "";
         }
     }
 }
