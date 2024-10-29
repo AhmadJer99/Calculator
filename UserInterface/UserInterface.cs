@@ -1,9 +1,6 @@
 ﻿using Spectre.Console;
 using CalculatorLibrary;
-using System.Text.RegularExpressions;
 using EnumsLibrary;
-using System;
-using System.Runtime.InteropServices;
 namespace UserInterfaceLibrary;
 
 
@@ -89,6 +86,7 @@ public class UserInterface
                     {
                         Console.WriteLine("Oh no! An exception occurred trying to do the math.\n - Details: " + e.Message);
                     }
+                    calculator.UsageCounter();
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     break;

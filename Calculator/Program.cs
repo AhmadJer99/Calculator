@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using CalculatorLibrary;
-using UserInterfaceLibrary;
+﻿using UserInterfaceLibrary;
 
 UserInterface userInterface = new UserInterface();
 userInterface.ShowMenu();

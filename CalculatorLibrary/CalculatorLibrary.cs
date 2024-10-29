@@ -1,8 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Text.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 using EnumsLibrary;
 using Spectre.Console;
 
@@ -56,7 +52,7 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operand2");
             writer.WriteValue(num2);
             writer.WritePropertyName("Operation");
-            var currentTime = System.DateTime.Now.ToString();
+
             // Use a switch statement to do the math.
             switch (operation)
             {
