@@ -7,15 +7,16 @@
             Calculator,
             UsePastResult, 
             ShowHistory,
-            DeleteHistory
+            DeleteHistory,
+            ShowUsageCount
         }
 
         public enum Operation
-        {
-            Addition = 'a',
-            Subtraction = 's',
-            Multiplication = 'm',
-            Division = 'd'
+        { 
+            Addition ,
+            Subtraction ,
+            Multiplication ,
+            Division 
         }
 }
 

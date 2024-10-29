@@ -103,11 +103,18 @@ public class UserInterface
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                     break;
+                case Enums.MenuAction.ShowUsageCount:
+                    calculator.ShowUsage();
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadKey();
+                    break;
+
+
 
             }
         }
         calculator.Finish();
-        calculator.ShowUsage();
+        
         return;
     }
 
