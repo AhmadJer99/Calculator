@@ -69,7 +69,7 @@ public class UserInterface
                     break;
                 case Enums.MenuAction.UsePastResult:
                     double pastResult = calculator.RetrievePastResult();
-                    Console.WriteLine("Unsupported yet, please come back later.");
+                    Console.WriteLine();
                     var operand = AnsiConsole.Ask<int>("[green]Type another number, and then press Enter: [/]");
 
                     // Ask the user to choose an operator.

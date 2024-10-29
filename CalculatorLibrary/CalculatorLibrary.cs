@@ -125,9 +125,8 @@ namespace CalculatorLibrary
                         new SelectionPrompt<string>()
                         .Title("[yellow]Choose the result you want to continue operations on:[/]")
                         .AddChoices(pastResults));
-            Console.Clear();
-            Console.WriteLine($"chosne value:{resultChoice}");
-            return 0;
+
+            return Convert.ToDouble(resultChoice.Substring(resultChoice.IndexOf('=')+1).Trim());
         }
     }
 }
