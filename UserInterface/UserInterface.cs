@@ -32,8 +32,8 @@ public class UserInterface
             {
                 case Enums.MenuAction.Calculator:
                     // Ask the user to type the first number.
-                    var cleanNum1 = AnsiConsole.Ask<int>("[green]Type a number, and then press Enter: [/]");
-                    var cleanNum2 = AnsiConsole.Ask<int>("[green]Type another number, and then press Enter: [/]");
+                    var cleanNum1 = AnsiConsole.Ask<double>("[green]Type a number, and then press Enter: [/]");
+                    var cleanNum2 = AnsiConsole.Ask<double>("[green]Type another number, and then press Enter: [/]");
 
                     // Ask the user to choose an operator.
                     var operationTypeChoice = AnsiConsole.Prompt(

@@ -4,6 +4,7 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using EnumsLibrary;
+using Spectre.Console;
 
 
 namespace CalculatorLibrary
@@ -123,6 +124,13 @@ namespace CalculatorLibrary
         }
         public double RetrievePastResult()
         {
+            string[] pastResults = _pastResults.Split(',');
+            var resultChoice = AnsiConsole.Prompt(
+                        new SelectionPrompt<string>()
+                        .Title("[yellow]Choose the result you want to continue operations on:[/]")
+                        .AddChoices(pastResults));
+            Console.Clear();
+            Console.WriteLine($"chosne value:{resultChoice}");
             return 0;
         }
     }
