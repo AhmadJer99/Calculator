@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using EnumsLibrary;
 
 
 namespace CalculatorLibrary
@@ -45,7 +46,7 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operations");
             writer.WriteStartArray();
         }
-        public  double DoOperation(double num1, double num2, string op)
+        public  double DoOperation(double num1, double num2, Enums.Operation operation)
         {
             double result = double.NaN; // Default value is "not-a-number" which we use if an operation, such as division, could result in an error.
             writer.WriteStartObject();
@@ -56,24 +57,24 @@ namespace CalculatorLibrary
             writer.WritePropertyName("Operation");
             var currentTime = System.DateTime.Now.ToString();
             // Use a switch statement to do the math.
-            switch (op)
+            switch (operation)
             {
-                case "a":
+                case Enums.Operation.Addition:
                     result = num1 + num2;
                     writer.WriteValue("Add");
                     _pastResults += $"{num1} + {num2} = {result},";
                     break;
-                case "s":
+                case Enums.Operation.Subtraction:
                     result = num1 - num2;
                     writer.WriteValue("Subtract");
                     _pastResults += $"{num1} - {num2} = {result},";
                     break;
-                case "m":
+                case Enums.Operation.Multiplication:
                     result = num1 * num2;
                     writer.WriteValue("Multiply");
                     _pastResults += $"{num1} * {num2} = {result},";
                     break;
-                case "d":
+                case Enums.Operation.Division:
                     // Ask the user to enter a non-zero divisor.
                     if (num2 != 0)
                     {
@@ -119,6 +120,10 @@ namespace CalculatorLibrary
         {
             Console.WriteLine("Deleting history...");
             _pastResults = "";
+        }
+        public double RetrievePastResult()
+        {
+            return 0;
         }
     }
 }
